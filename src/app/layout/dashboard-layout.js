@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Projects from '.././projects/projects';
-import Users from '.././users/users';
+import UserMain from '.././user/user-main';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -43,7 +43,7 @@ class DashboardLayout extends Component {
 
     switch (this.state.show) {
       case 'users':
-        content = (<Users />);
+        content = (<UserMain />);
         break;
 
       case 'projects':
@@ -59,22 +59,23 @@ class DashboardLayout extends Component {
 
         <AppBar
           iconClassNameRight="muidocs-icon-navigation-expand-more"
-          title="Learn about Drawer, MenuItem and Paper"
+          title="Project Management"
+          titleStyle={{ textAlign: "center" }}
           onLeftIconButtonClick={this.handleToggle}
         />
         <Drawer
-
           docked={false}
           width={200}
           open={this.state.open}
           onRequestChange={(open) => this.setState({ open })}>
-          <img src={logo} className="App-logo" alt="logo" />
-          <AppBar title="AppBar" />
+
+
+          <AppBar iconElementLeft={<img src={logo} className="App-logo" alt="logo" />} />
           <MenuItem id="showUsersId" onClick={this.showUsers}>Show Users</MenuItem>
           <MenuItem id="showProjectsId" onClick={this.showProjects}>Show Projects</MenuItem>
 
         </Drawer>
-        <Paper style={paperStyle} zDepth={9}>
+        <Paper style={paperStyle} zDepth={1}>
 
           {content}
 
