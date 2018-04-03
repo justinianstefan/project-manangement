@@ -6,6 +6,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
+import logo from '../../assets/img/logo.svg';
+
 
 
 const paperStyle = {
@@ -61,11 +63,12 @@ class DashboardLayout extends Component {
           onLeftIconButtonClick={this.handleToggle}
         />
         <Drawer
+
           docked={false}
           width={200}
           open={this.state.open}
           onRequestChange={(open) => this.setState({ open })}>
-
+          <img src={logo} className="App-logo" alt="logo" />
           <AppBar title="AppBar" />
           <MenuItem id="showUsersId" onClick={this.showUsers}>Show Users</MenuItem>
           <MenuItem id="showProjectsId" onClick={this.showProjects}>Show Projects</MenuItem>
