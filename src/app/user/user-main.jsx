@@ -32,26 +32,25 @@ class UserMain extends Component {
     }
 
     onCreateUser(newUser) {
-        console.log('onCreateUser::', newUser);
+        console.log('New User::', newUser);
         const users = this.state.users;
-        newUser.id = new Date().getTime();
-        users.push(Object.assign({}, newUser));
+
+        users.push(newUser);
         const newState = Object.assign(this.state, { users: users });
         this.setState(newState);
-        console.log('onCreateUser::', this.state.users);
+        console.log('onCreateUser::', users);
+
     }
 
     deleteUser(userId) {
         const users = this.state.users;
         const deleteIndex = users.findIndex(user => user.id = userId);
         users.splice(deleteIndex, 1);
-
         const newState = Object.assign(this.state, { users: users });
         this.setState(newState);
     }
 
     toggleUserForm() {
-        console.log('App::toggleUserForm');
         this.setState({ isFormVisible: !this.state.isFormVisible });
     }
 
@@ -64,13 +63,13 @@ class UserMain extends Component {
 
         return (
             <div className="user-main">
+                <h2>Users:</h2>
                 <RaisedButton
                     label="Toggle Users Form"
                     secondary={true}
                     style={RaisedButtonStyle}
-                    onClick={this.toggleIssueForm} />
-                <h2>Users:</h2>
-                <UserForm isVisible={this.userFormVisible} onCreateUser={this.onCreateUser} />
+                    onClick={this.toggleUserForm} />
+                <UserForm isVisible={userFormVisible} onCreateUser={this.onCreateUser} />
                 <UserTable users={this.state.users} onDeleteUser={this.deleteUser} />
             </div>
         )

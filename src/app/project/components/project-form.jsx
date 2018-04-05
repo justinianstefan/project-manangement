@@ -1,50 +1,42 @@
 import React, { Component } from 'react';
-import User from '../../shared/models/user-model';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import TextField from 'material-ui/TextField/TextField';
+import Project from '../../shared/models/project-model';
 
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-
-class UserForm extends Component {
-    userForm = undefined;
-
+class ProjectForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isVisible: props.isVisible,
-            userId: 4,
             textFieldValue: ''
-
         }
 
-        this.createUser = this.createUser.bind(this);
+        this.createProject = this.createProject.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ isVisible: nextProps.isVisible });
     }
 
-    createUser() {
-
+    createProject() {
         const input = this.state.textFieldValue;
-        const id = this.state.userId;
-        const user = new User({ id: id, name: input });
+        const project = new Project({ name: input });
 
-        this.props.onCreateUser(user);
+        this.props.onCreateProject(project);
 
-        this.setState(prevState => { return { userId: prevState.userId + 1 } });
-
+        console.log(this.state)
     }
 
-    handleUserNameChange = (e) => {
+    handleProjectNameChange = (e) => {
+        console.log(this.state.textFieldValue)
 
-
-        this.setState({ textFieldValue: e.target.value });
-
+        this.setState({ textFieldValue: e.target.value })
     }
-
 
     render() {
+
+        const formCls = this.state.isVisible ? '' : 'd-none';
 
         const textFieldStyle = {
             marginLeft: 20,
@@ -54,32 +46,27 @@ class UserForm extends Component {
             margin: 12,
         }
 
-
-        const formCls = this.state.isVisible ? '' : 'd-none';
-
-
         const form = (
             <form className={formCls}>
                 <div className="form-group">
-                    <label htmlFor="formGroupExampleInput">User name:</label>
+                    <label htmlFor="formGroupExampleInput">New project name:</label>
                     <TextField
                         hintText="Please enter a name"
                         style={textFieldStyle}
                         underlineShow={false}
                         id="formGroupExampleInput"
                         value={this.state.textFieldValue}
-                        onChange={this.handleUserNameChange} />
+                        onChange={this.handleProjectNameChange} />
                     <RaisedButton
                         label="Add User"
                         style={RaisedButtonStyle}
-                        onClick={this.createUser} />
+                        onClick={this.createProject} />
                 </div>
             </form>
         )
 
         return this.state.isVisible ? form : '';
-
     }
 }
 
-export default UserForm;
+export default ProjectForm;

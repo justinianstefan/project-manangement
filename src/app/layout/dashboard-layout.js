@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Projects from '.././projects/projects';
+import ProjectMain from '.././project/project-main';
 import UserMain from '.././user/user-main';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
@@ -47,7 +47,7 @@ class DashboardLayout extends Component {
         break;
 
       case 'projects':
-        content = (<Projects />);
+        content = (<ProjectMain />);
         break;
 
       default:
